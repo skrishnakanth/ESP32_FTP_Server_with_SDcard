@@ -7,8 +7,9 @@ The FTP (File Transfer Protocol):vhs: over ESP32 SD_MMC  type card implementatio
 * PlatformIO Extension
 * Platform - Espressif32
 * [Lolin32 Esp32 module](https://robu.in/product/wemos-lolin32-v1-0-0-based-on-esp32-rev1-wifi-bluetooth-board/) :link:
+
+* [Micro SD card](https://www.flipkart.com/sandisk-sdhc-16-gb-microsd-card-class-4-10-mb-s-memory/p/itm5290077029cd3?pid=ACCFMDZQJ2JJM5U8&lid=LSTACCFMDZQJ2JJM5U8IVLVMC&marketplace=FLIPKART&cmpid=content_memory-card_12825718239_u_8965229628_gmc_pla&tgi=sem,1,G,11214002,u,,,516793455547,,,,c,,,,,,,&ef_id=CjwKCAjwn6GGBhADEiwAruUcKg3eZ35fHfAmCZ3Sbwa5ub6zOSBw4JQ_UpVB6q2lpvCSSG_5HLwqhhoCbxUQAvD_BwE:G:s&s_kwcid=AL!739!3!516793455547!!!u!293946777986!&gclid=CjwKCAjwn6GGBhADEiwAruUcKg3eZ35fHfAmCZ3Sbwa5ub6zOSBw4JQ_UpVB6q2lpvCSSG_5HLwqhhoCbxUQAvD_BwE) :link:
 * [Micro SD Storage Board](https://www.amazon.in/Storage-Memory-Shield-Adapter-Arduino/dp/B00HFQEKI0) :link:
-* Jumper wires 
 ```
 Note !!!
 
@@ -18,16 +19,13 @@ Note !!!
 1. Install Visual Stdio Code and add Platform IO Extension.
 2. Download the source code here.
 3. Import the project to VS code.
-4. Change the WIFI & FTP Authentication in main.cpp over here
-    ```cpp
-    ...
-    /*config of WIFI and FTP Server*/
-    const char *ssid = "*******";        /* WIFI user name */
-    const char *password = "********";   /* WIFI password */
-    const char *ftp_user_name = "*****"; /* FTP Authorisation user name */
-    const char *ftp_password = "****";   /* FTP password */
-    ...
-    ```
+4. To add the WIFI and FTP Authorisation,just insert a file name "auth.txt" in SD card. Inside the auth.txt follow the format of text . I have also attached a reference auth.txt in this repository. Please do check it.
+```txt
+wifi_user_name="*****"// size of the wifi_user_name 20 bytes.
+wifi_pass="******"// size of the wifi_pass 20 bytes.
+FTP_user_name="******"// size of the FTP_user_name 20 bytes.
+FTP_pass="******"// size of the FTP_pass 20 bytes.
+```
 5. Now Attach the SD Card Module with ESP32 through SPI.
 
     | Pins_ESP32 | Pins_SD-card Module |
@@ -44,8 +42,11 @@ Note !!!
 
 ```
 Note!!!
+
+* The Authorisation name and password of both WIFI and FTP must be less then 20 character of each.
 * For debug purposes connect the ESP32 with terminal program for serial communication.
 * The IP address of the ESP32 will be available on that terminal.
+
 ```
 
 ## Connection Establishment methods :electric_plug:
@@ -159,5 +160,4 @@ Finally Enter the required cmd to access the FTP server. [Check out the image be
 
 # Next Updates :triangular_flag_on_post:
 
-* There will a credential file on SD card which has WIFI and FTP config setup so it is not required to alter the program each time with new config and again flash it to the controller.
 * Fix the issues mentioned above.
