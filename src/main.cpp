@@ -2,19 +2,16 @@
 #include <WiFi.h>
 #include <WiFiClient.h>
 #include "ESP32FtpServer.h"
-
-const char *ssid = "Krishna";        /* WIFI user name */
-const char *password = "00000000";   /* WIFI password */
-const char *ftp_user_name = "admin"; /* FTP Authorisation user name */
-const char *ftp_password = "pass";   /* FTP password */
+#include "files.h"
 
 FtpServer ftpSrv;
 
 void setup()
 {
-
+  SD_card_status(); /* Status of SD card*/
+  Auth_decode();    /* Decoding auth file from SD card for WIFI and FTP config*/
   Serial.begin(115200);
-  WiFi.begin(ssid, password);
+  WiFi.begin(wifi_name, wifi_pass);
   Serial.println("");
   while (WiFi.status() != WL_CONNECTED)
   {
@@ -24,7 +21,7 @@ void setup()
 
   Serial.println("");
   Serial.print("Connected to ");
-  Serial.println(ssid);
+  Serial.println(wifi_name);
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 
@@ -33,7 +30,7 @@ void setup()
     Serial.println("SD opened!");
     /* username, password for ftp.  
        set ports in ESP32FtpServer.h  (default 21 for FTP, 50009 for passive data port)*/
-    ftpSrv.begin(ftp_user_name, ftp_password); 
+    ftpSrv.begin(ftp_name, ftp_pass);
   }
 }
 
