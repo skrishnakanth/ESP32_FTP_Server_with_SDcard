@@ -1,0 +1,4 @@
+wifi_user_name="Krishna"
+wifi_pass="00000000"
+FTP_user_name="admin"
+FTP_pass="pass"
