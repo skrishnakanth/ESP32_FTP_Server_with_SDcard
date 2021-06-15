@@ -8,9 +8,9 @@ FtpServer ftpSrv;
 
 void setup()
 {
+  Serial.begin(115200);
   SD_card_status(); /* Status of SD card*/
   Auth_decode();    /* Decoding auth file from SD card for WIFI and FTP config*/
-  Serial.begin(115200);
   WiFi.begin(wifi_name, wifi_pass);
   Serial.println("");
   while (WiFi.status() != WL_CONNECTED)
